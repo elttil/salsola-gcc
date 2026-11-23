@@ -303,4 +303,7 @@ lrealpath (const char *filename)
     return res;
   }
 #endif // _WIN32
+
+  /* This system is a lost cause, just duplicate the filename.  */
+  return strdup (filename);
 }
