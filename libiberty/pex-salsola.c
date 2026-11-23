@@ -2,9 +2,7 @@
 
    A child is a process capability from fork_handle (), which is what
    waitod () and process_kill () take, so that od stands in for a pid
-   between exec_child and wait.  There are no plain pipes to hand a
-   child, so PEX_USE_PIPES is refused and callers fall back to
-   temporary files.  */
+   between exec_child and wait.  */
 
 #include "config.h"
 #include "libiberty.h"
@@ -178,11 +176,10 @@ pex_salsola_wait (struct pex_obj *obj ATTRIBUTE_UNUSED, pid_t pid,
 }
 
 static int
-pex_salsola_pipe (struct pex_obj *obj ATTRIBUTE_UNUSED, int *p ATTRIBUTE_UNUSED,
+pex_salsola_pipe (struct pex_obj *obj ATTRIBUTE_UNUSED, int *p,
 		  int binary ATTRIBUTE_UNUSED)
 {
-  errno = ENOSYS;
-  return -1;
+  return pipe (p);
 }
 
 static FILE *
